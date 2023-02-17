@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="nav.css" />
+	<link rel="icon" type="image/x-icon" href="/logo.jpeg" />
+	<title>CWRO</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			color: black;
+			font-family: sans-serif;
+			letter-spacing: 1px;
+			font-weight: 300;
+		}
+
+		body {
+			overflow-x: hidden;
+		}
+
+		nav {
+			height: 6rem;
+			width: 100vw;
+			background-color: white;
+			box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+			display: flex;
+			position: fixed;
+			z-index: 10;
+		}
+
+		/*Styling logo*/
+		.logo {
+			padding: 1vh 1vw;
+			text-align: center;
+		}
+
+		.logo img {
+			height: 5rem;
+			width: 5rem;
+		}
+
+		/*Styling Links*/
+		.nav-links {
+			display: flex;
+			list-style: none;
+			width: 88vw;
+			padding: 0 0.7vw;
+			justify-content: space-evenly;
+			align-items: center;
+			text-transform: uppercase;
+		}
+
+		.nav-links li a {
+			text-decoration: none;
+			margin: 0 0.7vw;
+		}
+
+		.nav-links li a:hover {
+			color: #dc9429;
+		}
+
+		.nav-links li {
+			position: relative;
+		}
+
+		.nav-links li a::before {
+			content: "";
+			display: block;
+			height: 3px;
+			width: 0%;
+			background-color: #dc9429;
+			position: absolute;
+			transition: all ease-in-out 250ms;
+			margin: 0 0 0 10%;
+		}
+
+		/*Styling Buttons*/
+		.login-button {
+			color: white;
+			background-color: black;
+			border: 1.5px solid #f2f5f7;
+			border-radius: 2em;
+			padding: 0.6rem 0.8rem;
+			margin-left: 2vw;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+
+		.login-button:hover {
+			color: white;
+			background-color: #dc9429;
+			border: 1.5px solid #f2f5f7;
+			transition: all ease-in-out 350ms;
+		}
+
+		.join-button {
+			color: white;
+			background-color: black;
+
+			border: 1.5px solid transparent;
+			border-radius: 2em;
+			padding: 0.6rem 0.8rem;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+
+		.join-button:hover {
+			color: white;
+			background-color: #dc9429;
+			border: 1.5px solid #f2f5f7;
+			transition: all ease-in-out 350ms;
+		}
+
+		/*Styling Hamburger Icon*/
+		.hamburger div {
+			width: 30px;
+			height: 3px;
+			background: #f2f5f7;
+			margin: 5px;
+			transition: all 0.3s ease;
+		}
+
+		.hamburger {
+			display: none;
+		}
+
+		/*Animating Hamburger Icon on Click*/
+		.toggle .line1 {
+			transform: rotate(-45deg) translate(-5px, 6px);
+		}
+
+		.toggle .line2 {
+			transition: all 0.7s ease;
+			width: 0;
+		}
+
+		.toggle .line3 {
+			transform: rotate(45deg) translate(-5px, -6px);
+		}
+
+		ul {
+			padding: 0;
+			list-style: none;
+			background: #f2f2f2;
+		}
+
+		ul li {
+			display: inline-block;
+			position: relative;
+			line-height: 21px;
+			text-align: left;
+		}
+
+		ul li a {
+			display: block;
+			padding: 8px 25px;
+			color: #333;
+			text-decoration: none;
+		}
+
+		ul li a:hover {
+			color: #fff;
+			background: #939393;
+		}
+
+		ul li ul.dropdown {
+			min-width: 100%;
+			/* Set width of the dropdown */
+			background: #f2f2f2;
+			display: none;
+			position: absolute;
+			z-index: 999;
+			left: 0;
+		}
+
+		ul li:hover ul.dropdown {
+			display: block;
+			/* Display the dropdown */
+		}
+
+		ul li ul.dropdown li {
+			display: block;
+		}
+
+		.founder {
+			display: flex;
+			background-color: #f3f7fc;
+			width: 100%;
+			height: 400px;
+		}
+
+		.founder_img {
+			width: 50vw;
+			height: 500px;
+			margin-top: 7%;
+			position: absolute;
+			display: flex;
+		}
+
+		.founder_text {
+			margin-left: 50%;
+			margin-top: 3%;
+			line-height: 20px;
+
+		}
+
+		.founder2 {
+			display: flex;
+			background-color: #f3f7fc;
+
+		}
+
+		.founder_img2>img {
+			width: 70vw;
+			height: 800px;
+			margin-top: 7%;
+		}
+
+		.founder_text2 {
+			position: relative;
+			width: 400px;
+			text-align: center;
+			right: 20%;
+			height: 420px;
+			text-overflow: clip;
+			margin-left: 1%;
+			margin-top: 20%;
+			background-color: aliceblue;
+			line-height: 20px;
+		}
+
+
+		.slide-container {
+			position: relative;
+			width: 100%;
+		}
+
+		.arrow {
+			cursor: pointer;
+			position: absolute;
+			top: -10%;
+			color: black;
+			background-color: #dc9429;
+			padding: 5px 20px;
+			font-size: 25px;
+			font-weight: bold;
+		}
+
+		.next {
+			right: 30%;
+		}
+
+		.prev {
+			left: 30%;
+		}
+
+		.slide {
+			display: none;
+		}
+
+		.c1 {
+			display: inline-block;
+			margin-left: 55px;
+			height: 40vh;
+			width: 25vw;
+			margin-top: -100px;
+			text-align: center;
+		}
+
+		.c1>img {
+			vertical-align: middle;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
+
+		.c2 {
+
+			display: inline-block;
+			margin-left: 5%;
+			height: 40vh;
+			width: 25vw;
+			border-radius: 100%;
+			margin-top: 3%;
+			text-align: center;
+		}
+
+		.c2>img {
+			vertical-align: middle;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
+
+		/*Stying for small screens*/
+		@media screen and (max-width: 800px) {
+
+			.founder_text h3 {
+				font-size: 20px;
+				margin-left: 10px;
+
+			}
+
+			.founder_text h5 {
+				font-size: 15px;
+				margin-left: 10px;
+
+			}
+
+			.founder2 {
+				display: flex;
+				flex-wrap: wrap;
+				background-color: #f3f7fc;
+
+			}
+
+			.founder_img2>img {
+				width: 100vw;
+				height: 50vh;
+				margin-top: 7%;
+			}
+
+			.next {
+				right: 1%;
+			}
+
+			.prev {
+				left: 1%;
+			}
+
+			.founder_text2 {
+				position: relative;
+				text-align: center;
+				height: 420px;
+				background-color: aliceblue;
+				line-height: 20px;
+				margin-left: 35%;
+				margin-right: 0%;
+			}
+
+			.c1 {
+				display: inline-block;
+				margin-left: 5%;
+				height: 15vh;
+				width: 25vw;
+				margin-top: 1%;
+				text-align: center;
+			}
+
+			.c1>img {
+				vertical-align: middle;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+
+			.c2 {
+				display: inline-block;
+				height: 15vh;
+				width: 25vw;
+				border-radius: 100%;
+				margin-top: 40%;
+				margin-left: 10%;
+				text-align: center;
+			}
+
+			.c2>img {
+				vertical-align: middle;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+
+			.nav-links li a {
+				text-decoration: none;
+				margin: 0 0.7vw;
+				color: white;
+			}
+
+			.nav-links li a:hover {
+				color: black;
+			}
+
+			.drop {
+				color: #131418;
+			}
+
+			nav {
+				position: fixed;
+				z-index: 3;
+			}
+
+
+			.hamburger {
+				display: block;
+				position: absolute;
+				cursor: pointer;
+				right: 5%;
+				top: 50%;
+				transform: translate(-5%, -50%);
+				z-index: 2;
+				transition: all 0.7s ease;
+			}
+
+			.nav-links {
+				position: fixed;
+				background: #131418;
+				height: 100vh;
+				width: 100%;
+				flex-direction: column;
+				clip-path: circle(50px at 90% -20%);
+				-webkit-clip-path: circle(50px at 90% -10%);
+				transition: all 1s ease-out;
+				pointer-events: none;
+
+			}
+
+			.nav-links.open {
+				clip-path: circle(1000px at 90% -10%);
+				-webkit-clip-path: circle(1000px at 90% -10%);
+				pointer-events: all;
+			}
+
+			.nav-links li {
+				opacity: 0;
+			}
+
+			.nav-links li:nth-child(1) {
+				transition: all 0.5s ease 0.2s;
+
+			}
+
+			.nav-links li:nth-child(2) {
+				transition: all 0.5s ease 0.4s;
+			}
+
+			.nav-links li:nth-child(3) {
+				transition: all 0.5s ease 0.6s;
+			}
+
+			.nav-links li:nth-child(4) {
+				transition: all 0.5s ease 0.7s;
+			}
+
+			.nav-links li:nth-child(5) {
+				transition: all 0.5s ease 0.8s;
+			}
+
+			.nav-links li:nth-child(6) {
+				transition: all 0.5s ease 0.9s;
+				margin: 0;
+			}
+
+			.nav-links li:nth-child(7) {
+				transition: all 0.5s ease 1s;
+				margin: 0;
+			}
+
+			li.fade {
+				opacity: 1;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<nav>
+			<div class="logo">
+				<a href="/"><img src="./logo.jpeg" alt="Logo Image" /></a>
+			</div>
+			<div class="hamburger">
+				<div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+			</div>
+			<ul class="nav-links">
+				<li><a href="#">Home</a></li>
+				<li>
+					<a href="#">Campaign &#9662;</a>
+					<ul class="dropdown">
+						<li class="drop"><a href="#">Azaad</a></li>
+						<li class="drop"><a href="#">Children Support</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Panelist &#9662;</a>
+					<ul class="dropdown">
+						<li class="drop"><a href="#">Judges</a></li>
+						<li class="drop"><a href="#">Lawyers</a></li>
+						<li class="drop"><a href="#">Consultants</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Library &#9662;</a>
+					<ul class="dropdown">
+						<li class="drop"><a href="#">Webinars</a></li>
+						<li class="drop"><a href="#">Gyankosh</a></li>
+						<li class="drop"><a href="#">Case Studies</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Join Us &#9662;</a>
+					<ul class="dropdown">
+						<li class="drop"><a href="#">Volunteer</a></li>
+						<li class="drop"><a href="#">Support Us</a></li>
+					</ul>
+				</li>
+
+
+				<li><button class="login-button" href="#">Login</button></li>
+				<li><button class="join-button" href="#">Register</button></li>
+			</ul>
+		</nav>
+	</div>
+	<br /><br /><br /><br /><br />
+
+	<img width="100%" src="./poster.jpeg" alt="" />
+	<img width="100%" src="./poste2.jpeg" alt="" />
+	<div class="founder">
+		<div class="founder_img">
+			<div class="c1">
+				<img src="/c1.jpeg" alt="" />
+
+			</div>
+			<div class="c2">
+				<img src="/c2.jpeg" alt="" />
+
+			</div>
+		</div>
+		<div class="founder_text">
+			<h3 style="color: #dc9429">FOUNDED BY SAJID ELECTRICWALA</h3>
+			<h5>
+				CWRO aspires to contribute in the society by initiating the
+				reformation Programmes for prison inmates and Reintegration
+				opportunities to released inmates.
+			</h5>
+		</div>
+	</div>
+
+
+	<div class="slide-container">
+		<div class="slide">
+
+			<div class="founder2">
+				<div class="founder_img2">
+					<img src="/images/azaad.jpeg" alt="" />
+				</div>
+
+				<div class="founder_text2">
+					<span class="arrow prev" onclick=show(-1)> &#10094 </span>
+					<span class="arrow next" onclick=show(1)> &#10095 </span>
+					<h3 style="color: #dc9429">Azaad</h3>
+					<h5>
+						After Serving a term in prison for a long time, inmates go through
+						mental health issues and depression. Our Program AZAAD facilitate them
+						to Overcome anxiety and Loneliness. AZAAD also is a campaign to make
+						sure the inmates get the appropriate help to Reform There life and
+						Help them with the legal support.
+					</h5>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="slide">
+			<div class="founder2">
+				<div class="founder_img2">
+					<img src="/azaad2.jpeg" alt="" />
+				</div>
+
+				<div class="founder_text2">
+					<span class="arrow prev" onclick=show(-1)> &#10094 </span>
+					<span class="arrow next" onclick=show(1)> &#10095 </span>
+					<h4 style="color: #dc9429">REINTEGRATION AND REFORM</h4>
+					<h5>
+						It facilitates to the released prison to embark again and start a new journey , A new Chapter of
+						life.
+					</h5>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+</body>
+<script>
+	const hamburger = document.querySelector(".hamburger");
+	const navLinks = document.querySelector(".nav-links");
+	const links = document.querySelectorAll(".nav-links li");
+
+	hamburger.addEventListener("click", () => {
+		//Animate Links
+		navLinks.classList.toggle("open");
+		links.forEach((link) => {
+			link.classList.toggle("fade");
+		});
+
+		//Hamburger Animation
+		hamburger.classList.toggle("toggle");
+	});
+</script>
+<script src="/slider.js"></script>
+
+</html>
